@@ -199,6 +199,7 @@ class IsValidFilter implements ImplicitRule
 
     switch (strtolower(camel_case($value))) {
       case 'eq':
+      case 'neq':
       case '=':
       case 'gt':
       case '>':
@@ -246,6 +247,7 @@ class IsValidFilter implements ImplicitRule
 
     switch (strtolower(camel_case($operator))) {
       case 'eq':
+      case 'neq':
       case '=':
       case 'gt':
       case '>':

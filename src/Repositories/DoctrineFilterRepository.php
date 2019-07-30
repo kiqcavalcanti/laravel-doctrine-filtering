@@ -114,6 +114,7 @@ class DoctrineFilterRepository extends EntityRepository
 
     switch ($operator) {
       case OperatorEnum::EQ:
+      case OperatorEnum::NEQ:
       case OperatorEnum::IN:
       case OperatorEnum::NOTIN:
       case OperatorEnum::LT:
@@ -175,6 +176,7 @@ class DoctrineFilterRepository extends EntityRepository
 
     switch ($operator) {
       case OperatorEnum::EQ:
+      case OperatorEnum::NEQ:
       case OperatorEnum::IN:
       case OperatorEnum::NOTIN:
       case OperatorEnum::LT:
@@ -251,6 +253,11 @@ class DoctrineFilterRepository extends EntityRepository
       case 'eq':
       case '=':
       return OperatorEnum::EQ;
+
+      case 'neq':
+      case '!=':
+      case '<>':
+        return OperatorEnum::NEQ;
 
       case 'gt':
       case '>':

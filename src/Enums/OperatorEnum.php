@@ -9,6 +9,7 @@ namespace LaravelDoctrineFiltering\Enums;
 class OperatorEnum
 {
   const EQ = 'eq';
+  const NEQ = 'neq';
   const GT = 'gt';
   const GTE = 'gte';
   const LT = 'lt';
