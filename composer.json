@@ -1,6 +1,7 @@
 {
     "name": "kiqcv/laravel-doctrine-filtering",
     "description": "apply dynamic filters using laravel doctrine",
+    "version":"1.0",
     "type": "library",
     "license": "MIT",
     "authors": [
