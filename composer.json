@@ -1,5 +1,5 @@
 {
-    "name": "kiqcv/laravel-doctrine-filtering",
+    "name": "kiqcavalcanti/laravel-doctrine-filtering",
     "description": "apply dynamic filters using laravel doctrine",
     "version":"1.0",
     "type": "library",
