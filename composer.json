@@ -19,5 +19,7 @@
     "psr-4": {
       "laravelDoctrineFiltering\\": "src"
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
