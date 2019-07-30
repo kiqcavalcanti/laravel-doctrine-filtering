@@ -4,6 +4,10 @@ namespace LaravelDoctrineFiltering\Entities;
 
 use LaravelDoctrine\ORM\Facades\EntityManager;
 
+/**
+ * Class FilterEntity
+ * @package LaravelDoctrineFiltering\Entities
+ */
 class FilterEntity
 {
   /**

@@ -19,7 +19,7 @@ class DoctrineFilterRepository extends EntityRepository
    */
   protected function applyFilters(QueryBuilder &$qb, array $filters)
   {
-    if (is_empty($filters)) {
+    if (empty($filters)) {
       return;
     }
 
@@ -103,7 +103,7 @@ class DoctrineFilterRepository extends EntityRepository
       return;
     }
 
-    if (is_empty($operator)) {
+    if (empty($operator)) {
       if (is_array($value)) {
         $qb->andWhere($qb->expr()->in($alias . '.' . $columnName, $value));
       } else {
@@ -158,13 +158,13 @@ class DoctrineFilterRepository extends EntityRepository
           : $columnName[$i-1];
 
        if($i === count($columnName) -1) {
-         $path = is_empty($path)
+         $path = empty($path)
            ? "JSON_GET_FIELD_AS_TEXT($currentColumn, '$previousColumn')"
            : "JSON_GET_FIELD_AS_TEXT($path, '$currentColumn')";
          break;
        }
 
-        $path = is_empty($path)
+        $path = empty($path)
           ? "JSON_GET_FIELD($previousColumn, '$currentColumn')"
           : "JSON_GET_FIELD($path, '$currentColumn')";
 

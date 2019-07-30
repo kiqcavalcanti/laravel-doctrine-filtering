@@ -2,6 +2,10 @@
 
 namespace LaravelDoctrineFiltering\Enums;
 
+/**
+ * Class OperatorEnum
+ * @package LaravelDoctrineFiltering\Enums
+ */
 class OperatorEnum
 {
   const EQ = 'eq';

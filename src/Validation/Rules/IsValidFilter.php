@@ -48,7 +48,7 @@ class IsValidFilter implements ImplicitRule
    */
   public function passes($attribute, $value)
   {
-    if (is_empty($this->filters)) {
+    if (empty($this->filters)) {
       return true;
     }
 
@@ -73,32 +73,32 @@ class IsValidFilter implements ImplicitRule
     $invalidJoins = implode(', ', $this->unavailableJoins);
     $invalidOperators = implode(', ', $this->unavailableOperators);
 
-    if (is_not_empty($invalidFields)) {
-      $message = is_empty($message)
+    if (!empty($invalidFields)) {
+      $message = empty($message)
         ? $message . 'invalid field(s): ' . $invalidFields
         : $message . ' | invalid field(s): ' . $invalidFields;
     }
 
-    if (is_not_empty($invalidJoins)) {
-      $message = is_empty($message)
+    if (!empty($invalidJoins)) {
+      $message = empty($message)
         ? $message . 'invalid join(s): ' . $invalidJoins
         : $message . ' | invalid join(s): ' . $invalidJoins;
     }
 
-    if (is_not_empty($invalidOperators)) {
-      $message = is_empty($message)
+    if (!empty($invalidOperators)) {
+      $message = empty($message)
         ? $message . 'invalid operator(s): ' . $invalidOperators
         : $message . ' | invalid operator(s): ' . $invalidOperators;
     }
 
     for ($i = 0; $i < count($this->unavailableValues); $i++) {
-      $message = is_empty($message)
+      $message = empty($message)
         ? $message . 'operator ' . "'" . $this->unavailableValues[$i]['operator'] . "'" . ' must receive a valid value, value given: ' . "'" . $this->unavailableValues[$i]['value'] . "'"
         : $message . ' | ' . 'operator ' . "'" . $this->unavailableValues[$i]['operator'] . "'" . ' must receive a valid value, value given: ' . "'" . $this->unavailableValues[$i]['value'] . "'";
     }
 
     for ($i = 0; $i < count($this->unavailableValuesByType); $i++) {
-      $message = is_empty($message)
+      $message = empty($message)
         ? $message . 'field type ' . "'" . $this->unavailableValuesByType[$i]['fieldType'] . "'" . ' must receive a valid value, value given: ' . "'" . $this->unavailableValuesByType[$i]['value'] . "'"
         : $message . ' | ' . 'field type ' . "'" . $this->unavailableValuesByType[$i]['fieldType'] . "'" . ' must receive a valid value, value given: ' . "'" . $this->unavailableValuesByType[$i]['value'] . "'";
     }
@@ -236,11 +236,11 @@ class IsValidFilter implements ImplicitRule
       $value = explode(',', $value);
     }
 
-    if (is_empty($operator) && is_array($value)) {
+    if (empty($operator) && is_array($value)) {
       $operator = 'in';
     }
 
-    if (is_empty($operator) && !is_array($value)) {
+    if (empty($operator) && !is_array($value)) {
       $operator = 'eq';
     }
 
@@ -256,7 +256,7 @@ class IsValidFilter implements ImplicitRule
       case 'lte':
       case '<=':
       case 'like':
-        if (is_empty($value) || is_array($value)) {
+        if (empty($value) || is_array($value)) {
           $this->isValid = false;
           $this->unavailableValues[] = ['operator' => $operator, 'value' => $valueGiven];
         }
@@ -269,7 +269,7 @@ class IsValidFilter implements ImplicitRule
       case 'between':
       case 'in':
       case 'notin':
-        if (is_empty($value) || !is_array($value)) {
+        if (empty($value) || !is_array($value)) {
           $this->isValid = false;
           $this->unavailableValues[] = ['operator' => $operator, 'value' => $valueGiven];
         }

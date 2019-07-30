@@ -1,41 +1,23 @@
 {
-  "name": "kiqcavalcanti/laravel-doctrine-filtering",
-  "description": "apply dynamic filters",
-  "type": "library",
-  "license": "proprietary",
-  "homepage": "",
-  "support": {
-    "source": "https://github.com/kiqcavalcanti/laravel-doctrine-filtering",
-    "issues": "https://github.com/kiqcavalcanti/laravel-doctrine-filtering/issues"
-  },
-  "authors": [
-    {
-      "name": "Kaique Cavalcanti",
-      "email": "kaiquescsantos@gmail.com"
-    }
-  ],
+    "name": "kiqcv/laravel-doctrine-filtering",
+    "description": "apply dynamic filters using laravel doctrine",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kaique Cavalcanti",
+            "email": "kaiquescsantos@gmail.com"
+        }
+    ],
   "require": {
     "php": "^7.1.3",
     "doctrine/collections": "^1.6",
     "laravel/framework": "5.8.*",
-    "laravel/tinker": "^1.0",
-    "laravel-doctrine/orm": "~1.4",
-    "ramsey/uuid": "^3.8",
-    "symfony/property-access": "^4.2",
-    "symfony/serializer": "^4.2"
-  },
-  "replace": {
+    "laravel-doctrine/orm": "~1.4"
   },
   "autoload": {
     "psr-4": {
       "laravelDoctrineFiltering\\": "src"
     }
-  },
-  "suggest": {
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
