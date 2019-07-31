@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "laravelDoctrineFiltering\\": "src"
+      "LaravelDoctrineFiltering\\": "src"
     }
   },
   "minimum-stability": "dev",
