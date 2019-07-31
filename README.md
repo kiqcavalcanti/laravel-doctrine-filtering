@@ -12,13 +12,12 @@ Apply dynamic query filters using laravel-doctrine
 In your entity add the joins with this structure:
 
   protected static $joins = [
-    'financial'            => ['entity' => AdvertisementFinancial::class, 'condition' => 'advertisement.financialId = financial.id'],
-    'status_type'          => ['entity' => Classification::class, 'condition' => 'advertisement.status_type_id = status_type.id'],
-    'layout'               => ['entity' => AdvertisementLayout::class, 'condition' => 'advertisement.layoutId = layout.id'],
-    'configuration'        => ['entity' => AdvertisementConfig::class, 'condition' => 'advertisement.configurationId = configuration.id'],
-    'customer_product'     => ['entity' => CustomerProduct::class, 'condition' => 'advertisement.customerProductId = customer_product.id'],
-    'site'                 => ['entity' => Site::class, 'condition' => 'advertisement.siteId = site.id'],
+        'customer_product' => [
+            'entity' => CustomerProduct::class,
+            'condition' => 'advertisement.customerProductId = customer_product.id'
+        ]
   ];
+
 
 # Examples
 
