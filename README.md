@@ -64,15 +64,15 @@ In your entity add a static attribute $joins with this structure:
 
       protected static $joins [
 
-     'customer_product' => ['entity' => CustomerProduct::class, 'condition' => 'advertisement.customerProductId = customer_product.id'],
-     'site' => ['entity' => Site::class, 'condition' => 'advertisement.siteId = site.id']
+       'customer_product' => ['entity' => CustomerProduct::class, 'condition' => 'advertisement.customerProductId = customer_product.id'],
+       'site' => ['entity' => Site::class, 'condition' => 'advertisement.siteId = site.id']
      ];
 
 # OperatorEnum / available operators
 
       case 'eq':
       case '=':
-      return OperatorEnum::EQ;
+        return OperatorEnum::EQ;
 
       case 'neq':
       case '!=':
