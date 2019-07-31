@@ -23,7 +23,7 @@ class FilterEntity
   public static function getAlias()
   {
     if(property_exists(get_called_class(), 'alias')) {
-      return get_called_class()::$alias;
+      return get_called_class()::$entityAlias;
     }
 
     return snake_case(array_last(explode('\\',get_called_class())));
