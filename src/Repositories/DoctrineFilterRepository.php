@@ -17,7 +17,7 @@ class DoctrineFilterRepository extends EntityRepository
    * @param QueryBuilder $qb
    * @param array $filters
    */
-  protected function applyFilters(QueryBuilder &$qb, array $filters)
+  protected function applyLaravelDoctrineFilters(QueryBuilder &$qb, array $filters)
   {
     if (empty($filters)) {
       return;
@@ -25,10 +25,10 @@ class DoctrineFilterRepository extends EntityRepository
 
     foreach ($filters as $attributeName => $value) {
       if (!is_array($value)) {
-        $this->applyFilter($qb, $attributeName, $value, $this->getEntityName());
+        $this->applyLaravelDoctrineFilter($qb, $attributeName, $value, $this->getEntityName());
       }
 
-      $this->applyRelationships($qb, $attributeName, $value, $this->getEntityName());
+      $this->applyLaravelDoctrineRelationships($qb, $attributeName, $value, $this->getEntityName());
     }
   }
 
@@ -38,9 +38,9 @@ class DoctrineFilterRepository extends EntityRepository
    * @param $values
    * @param $entityName
    */
-  protected function applyRelationships(QueryBuilder &$qb, $joinName, $values, $entityName)
+  protected function applyLaravelDoctrineRelationships(QueryBuilder &$qb, $joinName, $values, $entityName)
   {
-    $entityJoins = $entityName::getJoins();
+    $entityJoins = $entityName::getEntityJoins();
 
     if (!array_key_exists($joinName, $entityJoins)) {
       return;
@@ -50,9 +50,9 @@ class DoctrineFilterRepository extends EntityRepository
 
     foreach ($values as $jn => $v) {
       if (is_array($v)) {
-        $this->applyRelationships($qb, $jn, $v, $entityJoins[$joinName]['entity']);
+        $this->applyLaravelDoctrineRelationships($qb, $jn, $v, $entityJoins[$joinName]['entity']);
       } else {
-        $this->applyFilter($qb, $jn, $v, $entityJoins[$joinName]['entity']);
+        $this->applyLaravelDoctrineFilter($qb, $jn, $v, $entityJoins[$joinName]['entity']);
       }
     }
   }
@@ -63,9 +63,9 @@ class DoctrineFilterRepository extends EntityRepository
    * @param $value
    * @param $entity
    */
-  protected function applyFilter(QueryBuilder &$qb, $columnName, $value, $entity)
+  protected function applyLaravelDoctrineFilter(QueryBuilder &$qb, $columnName, $value, $entity)
   {
-    $columnNameFixed = self::prepareColumnName($columnName);
+    $columnNameFixed = self::prepareLaravelDoctrineColumnName($columnName);
 
     if (!is_array($columnNameFixed)) {
       if (!array_key_exists($columnNameFixed, $entity::getAvailableFields())) {
@@ -81,11 +81,11 @@ class DoctrineFilterRepository extends EntityRepository
       $columnNameFixed[0] = $entity::getAvailableFields()[array_first($columnNameFixed)]['fieldName'];
     }
 
-    $operator = self::prepareOperator($columnName);
-    $value = $this->prepareValue($value, $columnType, $operator);
-    $alias = $entity::getAlias();
+    $operator = self::prepareLaravelDoctrineOperator($columnName);
+    $value = $this->prepareLaravelDoctrineValue($value, $columnType, $operator);
+    $alias = $entity::getEntityAlias();
 
-    $this->applyWhere($qb, $alias, $columnNameFixed, $value, $operator, $columnType);
+    $this->applyLaravelDoctrineWhere($qb, $alias, $columnNameFixed, $value, $operator, $columnType);
   }
 
   /**
@@ -96,10 +96,10 @@ class DoctrineFilterRepository extends EntityRepository
    * @param $operator
    * @param $columnType
    */
-  protected function applyWhere(QueryBuilder &$qb, $alias, $columnName, $value, $operator, $columnType)
+  protected function applyLaravelDoctrineWhere(QueryBuilder &$qb, $alias, $columnName, $value, $operator, $columnType)
   {
     if ($columnType == 'jsonb') {
-      $this->applyJsonbWhere($qb, $alias, $columnName, $value, $operator, $columnType);
+      $this->applyLaravelDoctrineJsonbWhere($qb, $alias, $columnName, $value, $operator, $columnType);
       return;
     }
 
@@ -144,7 +144,7 @@ class DoctrineFilterRepository extends EntityRepository
    * @param $operator
    * @param $columnType
    */
-  protected function applyJsonbWhere(QueryBuilder &$qb, $alias, $columnName, $value, $operator, $columnType)
+  protected function applyLaravelDoctrineJsonbWhere(QueryBuilder &$qb, $alias, $columnName, $value, $operator, $columnType)
   {
     $path = null;
     if(is_array($columnName)) {
@@ -203,7 +203,7 @@ class DoctrineFilterRepository extends EntityRepository
    * @param $operator
    * @return array|int|string
    */
-  protected function prepareValue($value, $columnType, $operator)
+  protected function prepareLaravelDoctrineValue($value, $columnType, $operator)
   {
     if (strpos($value, ',') === false) {
       if (($columnType == 'carbondatetime' || $columnType == 'carbondate') &&
@@ -241,7 +241,7 @@ class DoctrineFilterRepository extends EntityRepository
    * @param $value
    * @return string|null
    */
-  protected function prepareOperator($value)
+  protected function prepareLaravelDoctrineOperator($value)
   {
     if (strpos($value, '|') === false) {
       return null;
@@ -299,7 +299,7 @@ class DoctrineFilterRepository extends EntityRepository
    * @param $value
    * @return array|string
    */
-  protected function prepareColumnName($value)
+  protected function prepareLaravelDoctrineColumnName($value)
   {
     if (strpos($value, '.') !== false) {
       $value = explode('.', $value);

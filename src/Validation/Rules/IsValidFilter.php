@@ -168,7 +168,7 @@ class IsValidFilter implements ImplicitRule
    */
   protected function getUnavailableRelationships($joinName, $values, $entityName)
   {
-    $entityJoins = $entityName::getJoins();
+    $entityJoins = $entityName::getEntityJoins();
 
     if (!array_key_exists($joinName, $entityJoins)) {
       $this->unavailableJoins[] = $joinName;

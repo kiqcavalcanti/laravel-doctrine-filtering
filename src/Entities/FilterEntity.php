@@ -18,11 +18,11 @@ class FilterEntity
   /**
    * @var array
    */
-  protected static $joins = [];
+  protected static $entityJoins = [];
 
-  public static function getAlias()
+  public static function getEntityAlias()
   {
-    if(property_exists(get_called_class(), 'alias')) {
+    if(property_exists(get_called_class(), 'entityAlias')) {
       return get_called_class()::$entityAlias;
     }
 
@@ -33,13 +33,13 @@ class FilterEntity
   /**
    * @return array
    */
-  public static function getJoins()
+  public static function getEntityJoins()
   {
     $entityName = get_called_class();
 
     $joins = [];
 
-    foreach ($entityName::$joins as $key => $join) {
+    foreach ($entityName::$entityJoins as $key => $join) {
       $entity = $join['entity'];
       $joins[$key]['entity'] = $join['entity'];
       $joins[$key]['condition'] = $join['condition'];
