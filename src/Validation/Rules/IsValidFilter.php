@@ -147,10 +147,12 @@ class IsValidFilter implements ImplicitRule
       if (!array_key_exists($columnNameFixed, $entityClass::getAvailableFields())) {
         $this->unavailableFields[] = $columnNameFixed;
         $this->isValid = false;
+        return;
       }
     } else if (!array_key_exists(array_first($columnNameFixed), $entityClass::getAvailableFields())) {
       $this->unavailableFields[] = array_first($columnNameFixed);
       $this->isValid = false;
+      return;
     }
 
     $operator = $this->getUnavailableOperators($attributeName);
