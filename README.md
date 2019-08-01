@@ -13,8 +13,8 @@ example:
      $qb = 
        $this->_em
          ->createQueryBuilder()
-         ->select($this->getEntityName()::getAlias())
-         ->from($this->getEntityName(), $this->getEntityName()::getAlias(), $indexBy);
+         ->select($this->getEntityName()::getEntityAlias())
+         ->from($this->getEntityName(), $this->getEntityName()::getEntityAlias(), $indexBy);
 
       $this->applyLaravelDoctrineFilters($qb, $filters);
 
