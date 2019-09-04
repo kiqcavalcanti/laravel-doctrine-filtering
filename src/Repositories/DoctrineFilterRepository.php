@@ -40,6 +40,8 @@ class DoctrineFilterRepository extends EntityRepository
    */
   protected function applyLaravelDoctrineRelationships(QueryBuilder &$qb, $joinName, $values, $entityName)
   {
+    $joinName = camel_case($joinName);
+
     $entityJoins = $entityName::getEntityJoins();
 
     if (!array_key_exists($joinName, $entityJoins)) {
@@ -308,18 +310,18 @@ class DoctrineFilterRepository extends EntityRepository
     if (is_array($value)) {
 
       if (strpos($value[count($value) - 1], '|') === false) {
-        return $value;
+        return camel_case($value);
       }
 
       $value[count($value) - 1] = trim(substr($value[count($value) - 1], 0, strpos($value[count($value) - 1], '|')));
 
-      return $value;
+      return camel_case($value);
     }
 
     if (strpos($value, '|') === false) {
-      return trim($value);
+      return camel_case(trim($value));
     }
 
-    return trim(substr($value, 0, strpos($value, '|')));
+    return camel_case(trim(substr($value, 0, strpos($value, '|'))));
   }
 }

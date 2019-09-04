@@ -41,6 +41,9 @@ class FilterEntity
 
     foreach ($entityName::$entityJoins as $key => $join) {
       $entity = $join['entity'];
+
+      $key = camel_case($key);
+
       $joins[$key]['entity'] = $join['entity'];
       $joins[$key]['condition'] = $join['condition'];
       $joins[$key]['available_fields'] = $entity::getAvailableFields();
@@ -60,7 +63,9 @@ class FilterEntity
 
     foreach ($fields as $key => $field) {
       if(in_array($field['columnName'], self::$availableFields) || in_array('*', self::$availableFields)) {
-        $availableFields[$field['columnName']] = ['type' => $field['type'], 'fieldName' => $field['fieldName']];
+        $fieldKey = camel_case($field['columnName']);
+
+        $availableFields[$fieldKey] = ['type' => $field['type'], 'fieldName' => $field['fieldName']];
       }
     }
     return $availableFields;
