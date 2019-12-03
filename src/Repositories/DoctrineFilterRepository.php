@@ -221,7 +221,7 @@ class DoctrineFilterRepository extends EntityRepository
     $value = array_map(function ($value) use($columnType, $operator) {
       return $columnType === 'int' || $columnType === 'integer' || $columnType === 'bigint'
         ? (int) $value
-        : $operator === OperatorEnum::LIKE ? "'%". strtolower($value) . "%'" :  trim($value);
+        : ($operator === OperatorEnum::LIKE ? "'%". strtolower($value) . "%'" :  trim($value));
     }, $value);
 
     if (($columnType == 'carbondatetime' || $columnType == 'carbondate') &&
