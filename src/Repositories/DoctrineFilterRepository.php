@@ -213,7 +213,7 @@ class DoctrineFilterRepository extends EntityRepository
 
       return $columnType === 'int' || $columnType === 'integer' || $columnType === 'bigint'
       ? (int) $value
-      : $operator === OperatorEnum::LIKE ? "'%". strtolower($value) . "%'" : "'" . trim($value) . "'";
+      : ($operator === OperatorEnum::LIKE ? "'%". strtolower($value) . "%'" : "'" . trim($value) . "'");
     }
 
     $value = explode(',', $value);
