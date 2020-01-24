@@ -98,17 +98,16 @@ class DoctrineFilterRepository extends EntityRepository
    */
   protected function applyLaravelDoctrineWhere(QueryBuilder &$qb, $alias, $columnName, $value, $operator, $columnType)
   {
-    if ($columnType == 'jsonb') {
-      $this->applyLaravelDoctrineJsonbWhere($qb, $alias, $columnName, $value, $operator, $columnType);
-      return;
-    }
-
     if (empty($operator)) {
       if (is_array($value)) {
-        $qb->andWhere($qb->expr()->in($alias . '.' . $columnName, $value));
+        $operator = OperatorEnum::IN;
       } else {
-        $qb->andWhere($qb->expr()->eq($alias . '.' . $columnName, $value));
+        $operator = OperatorEnum::EQ;
       }
+    }
+
+    if ($columnType == 'jsonb') {
+      $this->applyLaravelDoctrineJsonbWhere($qb, $alias, $columnName, $value, $operator, $columnType);
       return;
     }
 
